@@ -5,10 +5,33 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>bonk.day</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
 </head>
 <body>
-    <div style="text-align: center;">
-        <image src="bonk.gif"></image>
+    <div id="bonkStatus">
+        <image class="doBonk" src="bonk.gif"></image>
+        <image class="noBonk" src="bonk.gif"></image>
     </div>
+    <script>
+        const DAY_IN_MS = 24 * 60 * 60 * 1000;
+
+        function consumeBonk() {
+            let lastBonkStr = localStorage.getItem("lastBonk");
+
+            // Return false if there is a recent "bonk".
+            if(lastBonkStr) {
+                let lastBonk = Number.parseInt(lastBonkStr, 10);
+                let now = Date.now();
+                if(lastBonk > (now - DAY_IN_MS)) {
+                    return false;
+                }
+            }
+            localStorage.setItem("lastBonk", Date.now());
+            return true;
+        }
+
+        let shouldBonk = consumeBonk();
+        document.getElementById("bonkStatus").toggleAttribute("bonk", shouldBonk);
+    </script>
 </body>
 </html>
