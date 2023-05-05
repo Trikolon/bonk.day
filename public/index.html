@@ -1,47 +1,48 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>bonk.day</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  </head>
+  <body>
     <div id="bonkStatus">
-        <image class="doBonk" src="bonk.gif"></image>
-        <image class="noBonk" src="no-bonk.png"></image>
-        <h3 id="message"></h3>
+      <image class="doBonk" src="bonk.gif"></image>
+      <image class="noBonk" src="no-bonk.png"></image>
+      <h3 id="message"></h3>
     </div>
     <script>
-        const DAY_IN_MS = 24 * 60 * 60 * 1000;
+      const DAY_IN_MS = 24 * 60 * 60 * 1000;
 
-        function consumeBonk() {
-            let lastBonkStr = localStorage.getItem("lastBonk");
-            let nextBonk = Date.now();
+      function consumeBonk() {
+        let lastBonkStr = localStorage.getItem("lastBonk");
+        let nextBonk = Date.now();
 
-            // Return false if there is a recent "bonk".
-            if(lastBonkStr) {
-                let lastBonk = Number.parseInt(lastBonkStr, 10);
-                let now = Date.now();
+        // Return false if there is a recent "bonk".
+        if (lastBonkStr) {
+          let lastBonk = Number.parseInt(lastBonkStr, 10);
+          let now = Date.now();
 
-                nextBonk = lastBonk + DAY_IN_MS;
+          nextBonk = lastBonk + DAY_IN_MS;
 
-                if(now < nextBonk) {
-                    return {doBonk: false, nextBonk};
-                }
-            }
-            localStorage.setItem("lastBonk", Date.now());
-
-            return {doBonk: true, nextBonk};
+          if (now < nextBonk) {
+            return { doBonk: false, nextBonk };
+          }
         }
+        localStorage.setItem("lastBonk", Date.now());
 
-        let {doBonk, nextBonk} = consumeBonk();
-        document.getElementById("bonkStatus").toggleAttribute("bonk", doBonk);
+        return { doBonk: true, nextBonk };
+      }
 
-        let messageEl = document.getElementById("message");
-        messageEl.innerText = `Come back for your next BONK tomorrow at ${new Date(nextBonk).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
+      let { doBonk, nextBonk } = consumeBonk();
+      document.getElementById("bonkStatus").toggleAttribute("bonk", doBonk);
 
+      let messageEl = document.getElementById("message");
+      messageEl.innerText = `Come back for your next BONK tomorrow at ${new Date(
+        nextBonk
+      ).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
     </script>
-</body>
+  </body>
 </html>

@@ -1,11 +1,13 @@
 #bonkStatus {
-    text-align: center;
+  text-align: center;
 }
 
-#bonkStatus[bonk] .doBonk, #bonkStatus:not([bonk]) .noBonk{
-    display: initial;
+#bonkStatus[bonk] .doBonk,
+#bonkStatus:not([bonk]) .noBonk {
+  display: initial;
 }
 
-#bonkStatus:not([bonk]) .doBonk, #bonkStatus[bonk] .noBonk{
-    display: none;
+#bonkStatus:not([bonk]) .doBonk,
+#bonkStatus[bonk] .noBonk {
+  display: none;
 }
