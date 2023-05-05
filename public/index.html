@@ -26,20 +26,21 @@
 
       function consumeBonk() {
         let lastBonkStr = localStorage.getItem("lastBonk");
-        let nextBonk = Date.now();
+        let nextBonk;
+        let now = Date.now();
 
-        // Return false if there is a recent "bonk".
         if (lastBonkStr) {
           let lastBonk = Number.parseInt(lastBonkStr, 10);
-          let now = Date.now();
 
           nextBonk = lastBonk + DAY_IN_MS;
 
           if (now < nextBonk) {
             return { doBonk: false, nextBonk };
           }
+        } else {
+          nextBonk = now + DAY_IN_MS;
         }
-        localStorage.setItem("lastBonk", Date.now());
+        localStorage.setItem("lastBonk", now);
 
         return { doBonk: true, nextBonk };
       }
