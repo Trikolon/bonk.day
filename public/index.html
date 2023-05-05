@@ -10,28 +10,38 @@
 <body>
     <div id="bonkStatus">
         <image class="doBonk" src="bonk.gif"></image>
-        <image class="noBonk" src="bonk.gif"></image>
+        <image class="noBonk" src="no-bonk.png"></image>
+        <h3 id="message"></h3>
     </div>
     <script>
         const DAY_IN_MS = 24 * 60 * 60 * 1000;
 
         function consumeBonk() {
             let lastBonkStr = localStorage.getItem("lastBonk");
+            let nextBonk = Date.now();
 
             // Return false if there is a recent "bonk".
             if(lastBonkStr) {
                 let lastBonk = Number.parseInt(lastBonkStr, 10);
                 let now = Date.now();
-                if(lastBonk > (now - DAY_IN_MS)) {
-                    return false;
+
+                nextBonk = lastBonk + DAY_IN_MS;
+
+                if(now < nextBonk) {
+                    return {doBonk: false, nextBonk};
                 }
             }
             localStorage.setItem("lastBonk", Date.now());
-            return true;
+
+            return {doBonk: true, nextBonk};
         }
 
-        let shouldBonk = consumeBonk();
-        document.getElementById("bonkStatus").toggleAttribute("bonk", shouldBonk);
+        let {doBonk, nextBonk} = consumeBonk();
+        document.getElementById("bonkStatus").toggleAttribute("bonk", doBonk);
+
+        let messageEl = document.getElementById("message");
+        messageEl.innerText = `Come back for your next BONK tomorrow at ${new Date(nextBonk).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
+
     </script>
 </body>
 </html>
