@@ -3,12 +3,12 @@
   text-align: center;
 }
 
-#bonkStatus[bonk] .doBonk,
-#bonkStatus:not([bonk]) .noBonk {
-  display: initial;
+#linkTryAgain {
+  display: block;
 }
 
 #bonkStatus:not([bonk]) .doBonk,
-#bonkStatus[bonk] .noBonk {
+#bonkStatus[bonk] .noBonk,
+#bonkStatus[bonk] #timerMessage {
   display: none;
 }

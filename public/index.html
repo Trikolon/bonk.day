@@ -54,10 +54,13 @@
         bonkStatusMessageEl.textContent = "Sorry, out of BONKs.";
       }
 
-      let timerMessageEl = document.getElementById("timerMessage");
-      timerMessageEl.innerText = `Come back for your next BONK tomorrow at ${new Date(
-        nextBonk
-      ).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
+      // Generate the bonk timer message. We only show the timer if the bonk was denied.
+      if (!doBonk) {
+        let timerMessageEl = document.getElementById("timerMessage");
+        timerMessageEl.innerText = `Come back for your next BONK tomorrow at ${new Date(
+          nextBonk
+        ).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
+      }
 
       document.getElementById("linkTryAgain").addEventListener("click", (e) => {
         e.preventDefault();
