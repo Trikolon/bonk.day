@@ -13,6 +13,7 @@
       <image class="doBonk" src="bonk.gif"></image>
       <image class="noBonk" src="no-bonk.png"></image>
       <h3 id="timerMessage"></h3>
+      <a id="linkTryAgain" href="#">Request new BONK</a>
     </div>
     <script>
       const DAY_IN_MS = 24 * 60 * 60 * 1000;
@@ -57,6 +58,11 @@
       timerMessageEl.innerText = `Come back for your next BONK tomorrow at ${new Date(
         nextBonk
       ).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
+
+      document.getElementById("linkTryAgain").addEventListener("click", (e) => {
+        e.preventDefault();
+        location.reload();
+      });
     </script>
     <script>
       console.info(
