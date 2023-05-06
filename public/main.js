@@ -1,3 +1,6 @@
+// DayJS extension needed for generating relative time labels.
+dayjs.extend(dayjs_plugin_relativeTime);
+
 const DAY_IN_MS = 24 * 60 * 60 * 1000;
 
 // Reset easter egg, if more bonks are needed.
@@ -40,9 +43,9 @@ if (doBonk) {
 // Generate the bonk timer message. We only show the timer if the bonk was denied.
 if (!doBonk) {
   let timerMessageEl = document.getElementById("timerMessage");
-  timerMessageEl.innerText = `Come back for your next BONK tomorrow at ${new Date(
-    nextBonk
-  ).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
+  let timeLabel = dayjs().to(nextBonk);
+
+  timerMessageEl.innerText = `Come back for your next BONK ${timeLabel}.`;
 }
 
 document.getElementById("linkTryAgain").addEventListener("click", (e) => {
