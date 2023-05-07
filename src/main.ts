@@ -2,6 +2,21 @@ import "./style.css";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import fingerprintjs from "@fingerprintjs/fingerprintjs";
+
+(async () => {
+  console.debug("loading fingerprinter library");
+  let fp = await fingerprintjs.load();
+  let fpResult = await fp.get();
+  console.debug("fp result", fpResult);
+
+  // TODO: send this computed fingerprint to the backend. Could combine it with
+  // ip address?
+
+  // From now on ask the backend for lastBonk timestamps, no longer use local
+  // browser storage. Can use cloudflare workers with their KV store. But make
+  // sure to expire data, we don't need the identifier past the bonk threshold!
+})();
 
 // DayJS extension needed for generating relative time labels.
 dayjs.extend(relativeTime);
