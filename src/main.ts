@@ -71,3 +71,4 @@ document.getElementById("linkTryAgain")!.addEventListener("click", (e) => {
 console.info(
   "Thanks for the inspiration, R.\nMaybe there is() a way to bypass this limit..."
 );
+console.info("Are you a robot? Try https://api.bonk.day");
