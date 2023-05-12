@@ -7,6 +7,8 @@ import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
 const DAY_IN_MS = 24 * 60 * 60 * 1000;
+const MESSAGE_BONK = "BONK!";
+const MESSAGE_NO_BONK = "Sorry, out of BONKs.";
 
 declare global {
   // Reset easter egg, if more bonks are needed.
@@ -43,11 +45,15 @@ let { doBonk, nextBonk } = consumeBonk();
 document.getElementById("bonkStatus")!.toggleAttribute("bonk", doBonk);
 
 let bonkStatusMessageEl = document.getElementById("bonkStatusMessage")!;
+
+let message;
 if (doBonk) {
-  bonkStatusMessageEl.textContent = "BONK!";
+  message = MESSAGE_BONK;
 } else {
-  bonkStatusMessageEl.textContent = "Sorry, out of BONKs.";
+  message = MESSAGE_NO_BONK;
 }
+bonkStatusMessageEl.textContent = message;
+document.title = message;
 
 // Generate the bonk timer message. We only show the timer if the bonk was denied.
 if (!doBonk) {
