@@ -10,15 +10,22 @@
     <div id="app">
       <div id="bonkStatus">
         <h1 id="bonkStatusMessage">Loading BONK</h1>
-        <image
+        <video
           class="doBonk"
-          src="bonk.gif"
+          src="bonk.mp4"
           height="200"
           alt="Go to Horny Jail meme animation"
-        ></image>
+          autoplay
+          loop
+          muted
+          playsinline
+        >
+          <source src="bonk.webm" type="video/mp4" codecs="TODO" />
+          <source src="bonk.mp4" type="video/mp4" />
+        </video>
         <image
           class="noBonk"
-          src="no-bonk.png"
+          src="no-bonk.avif"
           height="200"
           alt="Shiba Inu dog sleeping in a bed covered by a blanket"
         ></image>
